@@ -1,0 +1,13 @@
+ctrl_interface=/var/run/wpa_supplicant
+ctrl_interface_group=0
+ap_scan=1
+
+network={
+        ssid="YOUR_SSID"
+        proto=RSN
+        key_mgmt=WPA-PSK
+        pairwise=CCMP TKIP
+        group=CCMP TKIP
+        psk="YOUR_PASSWORD"
+}
+

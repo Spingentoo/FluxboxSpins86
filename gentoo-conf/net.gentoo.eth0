@@ -1,0 +1,9 @@
+# This blank configuration will automatically use DHCP for any net.*
+# scripts in /etc/init.d.  To create a more complete configuration,
+# please review /etc/conf.d/net.example and save your configuration
+# in /etc/conf.d/net (this file :]!).
+dns_domain_lo="TUX"
+#config_eth0=( "dhcp" )
+config_eth0=( "192.168.1.10 netmask 255.255.255.0 brd 192.168.1.255" )
+routes_eth0=( "default via 192.168.1.1" )
+dns_servers_eth0="192.168.1.1"

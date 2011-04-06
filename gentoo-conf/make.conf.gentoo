@@ -1,0 +1,13 @@
+CFLAGS="-O2 -march=native -pipe"
+CXXFLAGS="${CFLAGS}"
+CHOST="x86-pc-linux-gnu"
+MAKEOPTS="-j5"
+GENTOO_MIRRORS="http://gentoo.osuosl.org/ http://www.gtlib.gatech.edu/pub/gentoo http://mirror.usu.edu/mirrors/gentoo"
+SYNC="rsync://rsync.gentoo.org"
+USE="bash-completion"
+USE="X imlib2 -gtk -gnome -qt4 -kde"
+INPUT_DEVICES="evdev synaptics"
+VIDEO_CARDS="intel"
+USE="vaapi"
+ACCEPT_KEYWORDS=""
+

@@ -1,0 +1,9 @@
+media-libs/libpng static-libs
+media-libs/lcms static-libs
+media-libs/libmng static-libs
+media-libs/jpeg:0 static-libs
+virtual/jpeg static-libs
+media-gfx/splashutils fbcondecor
+x11-base/xorg-server udev
+x11-wm/fluxbox -gnome -kde truetype vim-syntax
+app-admin/conky truetype audacious -ipv6

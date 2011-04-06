@@ -1,0 +1,14 @@
+# This blank configuration will automatically use DHCP for any net.*
+# scripts in /etc/init.d.  To create a more complete configuration,
+# please review /etc/conf.d/net.example and save your configuration
+# in /etc/conf.d/net (this file :]!).
+dns_domain_lo="TUX"
+config_eth0=( "dhcp" )
+# Prefer wpa_supplicant over wireless-tools
+modules=( "wpa_supplicant" )
+
+# It's important that we tell wpa_supplicant which driver we should
+# be using as it's not very good at guessing yet
+wpa_supplicant_eth0="-Diwlagn"
+##iwconfig_eth0="mode managed"
+ifplugd_eth0="--api-mode=wlan"

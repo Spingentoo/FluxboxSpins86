@@ -1,0 +1,53 @@
+# Copyright (C) 2011 Vishwanath Venkataraman (thelinuxguyis@yahoo.co.in)
+# This program is relased under GNU GPL Version 3, 29 June 2007
+# For conditions of distribution and use, see copyright notice in COPYRIGHT.txt
+# This is free software; the Free Software Foundation
+# gives unlimited permission to copy and/or distribute it,
+# with or without modifications, as long as this notice is preserved.
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY, to the extent permitted by law; without
+# even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE.
+# See the GNU General Public License for more details.
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+ ====================
+  What does this do?
+ ====================
+
+  This program will automatically format a partition and perform a series of steps to install Latest Minimal Gentoo x86 (i686) Release.
+  Make sure the partition you want to use is atleast 4-5 GB
+
+ ==================
+  How do I use it?
+ ==================
+
+ 1) Boot from Gentoo Live DVD/CD or Any running Linux System like Ubuntu/Debian or another Gentoo :-) 
+
+ 2) Download Gentoo Install Script
+
+ 3) Run the install script
+
+  ./install-0.1.sh
+
+  This will invoke 001-gentoo-install-x86_stage3.sh script and setup your device partition for stage3 based installation.
+
+ 4) Run the chroot script
+
+   ./chroot2Gentoo-0.1.sh
+
+ 5) Run the Gentoo Stage 3 configuration script now.
+
+   ./002-gentoo-configure-x86_stage3.sh 
+
+TODO:
+
+a) Support for additional packages.
+b) Increase interactive behaviour.
+c) Kernel Modules auto-detection. 
+
+BUGS:
+
+Report bugs to
+	Vish (thelinuxguyis@yahoo.co.in)
