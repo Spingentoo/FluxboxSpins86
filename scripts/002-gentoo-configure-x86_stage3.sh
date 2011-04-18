@@ -191,7 +191,7 @@ fluxbox_install()
 	echo "exec startfluxbox" > ~/.xinitrc
 }
 
-misc_install()
+misc_libs_install()
 {
 	echo -e "${yellowf}Installing Mesa , Cairo, Conky....${reset}"
 	sleep 5;
@@ -210,6 +210,14 @@ misc_install()
 	fluxbog-generate_menu -is -dg
 
 #wpsetters=feh fbsetbg /etc/splash/natural_gentoo/images/silent-1920x1200.jpg
+}
+
+gentoo_sync()
+{
+emerge -Duv world
+python-updater
+revdep-rebuild
+etc-update
 }
 
 start_script()
@@ -248,8 +256,10 @@ do
 	echo -e "${boldon}${greenf}8. Install Splash Themes${reset}"
 	echo -e "${boldon}${greenf}9. Install Minimal X${reset}"
 	echo -e "${boldon}${greenf}10. Install Fluxbox${reset}"
-	echo -e "${boldon}${yellowf}11. Exit${reset}"
-echo -e "${boldon}${redf}Please enter option [1 - 11]${reset}"
+	echo -e "${boldon}${greenf}11. Install Mesa,Cairo,Conky....${reset}"
+	echo -e "${boldon}${greenf}12. Sync Gentoo - world update,re-build cache...${reset}"
+	echo -e "${boldon}${yellowf}13. Exit${reset}"
+echo -e "${boldon}${redf}Please enter option [1 - 13]${reset}"
 read opt
 case $opt in
         1) configure_gentoo;;
@@ -262,9 +272,11 @@ case $opt in
         8) splash_install;;
         9) xorg_install;;
         10) fluxbox_install;;
-        11) echo "Exit";
+	11) misc_libs_install;;
+	12) gentoo_sync;;
+        13) echo "Exit";
                 exit 1;;
-        *) echo "$opt is an invaild option. Please select option between 1-11 only";
+        *) echo "$opt is an invaild option. Please select option between 1-13 only";
                 echo "Press [enter] key to continue. . .";
                 read enterKey;;
 esac
@@ -283,6 +295,8 @@ configure_gentoo()
 	splash_install
 	xorg_install
 	fluxbox_install
+	misc_libs_install
+	gentoo_sync
 
 echo -e "${redf}DONT FORGET TO CHANGE ROOT PASSWORD AFTER A NEW GENTOO INSTALL!!!"
 echo -e "DONT FORGET TO CHANGE ROOT PASSWORD AFTER A NEW GENTOO INSTALL!!!${reset}"

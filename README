@@ -22,13 +22,14 @@
  ==================
   How do I use it?
  ==================
-
  1) Boot from Gentoo Live DVD/CD or Any running Linux System like Ubuntu/Debian or another Gentoo :-) 
+	Link: http://gentoo.osuosl.org/releases/x86/11.0/livedvd-x86-amd64-32ul-11.0.iso
 
  2) Download Gentoo Install Script
+	git clone https://github.com/Spingentoo/FluxboxSpins86.git
 
  3) Run the install script
-
+   cd FluxboxSpins86
   ./install-0.1.sh
 
   This will invoke 001-gentoo-install-x86_stage3.sh script and setup your device partition for stage3 based installation.
@@ -44,8 +45,6 @@
 TODO:
 
 a) Support for additional packages.
-b) Increase interactive behaviour.
-c) Kernel Modules auto-detection. 
 
 BUGS:
 
