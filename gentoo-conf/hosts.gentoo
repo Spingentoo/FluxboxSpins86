@@ -29,4 +29,4 @@
 # from your network provider (if any) or from your regional registry (ARIN, 
 # APNIC, LACNIC, RIPE NCC, or AfriNIC.)
 #
-127.0.0.1     Gentoo64.TUX Gentoo64 localhost
+127.0.0.1     Gentoo32.TUX Gentoo32 localhost

@@ -1,13 +1,18 @@
+# These settings were set by the catalyst build script that automatically
+# built this stage.
+# Please consult /usr/share/portage/config/make.conf.example for a more
+# detailed example.
+# Check native settings with 'gcc -c -Q -march=native --help=target'
 CFLAGS="-O2 -march=native -pipe"
 CXXFLAGS="${CFLAGS}"
+# WARNING: Changing your CHOST is not something that should be done lightly.
+# Please consult http://www.gentoo.org/doc/en/change-chost.xml before changing.
 CHOST="x86-pc-linux-gnu"
 MAKEOPTS="-j5"
 GENTOO_MIRRORS="http://gentoo.osuosl.org/ http://www.gtlib.gatech.edu/pub/gentoo http://mirror.usu.edu/mirrors/gentoo"
 SYNC="rsync://rsync.gentoo.org"
-USE="bash-completion"
-USE="X imlib2 -gtk -gnome -qt4 -kde"
+USE="X imlib2 -gtk -gnome -qt4 -kde bash-completion"
 INPUT_DEVICES="evdev synaptics"
 VIDEO_CARDS="intel"
 USE="vaapi"
 ACCEPT_KEYWORDS=""
-

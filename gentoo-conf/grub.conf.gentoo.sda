@@ -1,6 +1,9 @@
+#This is samp GRUB Template 
+#Feel free to edit to your liking
+
 default 0
 timeout 30
-splashimage=(hd0,6)/boot/grub/splash.xpm.gz
+splashimage=(hd0,6)/boot/grub/splashimages/grub_buddha_tux.xpm.gz
 
 title Ubuntu with Linux 2.6.37.4
 root (hd0,5)
@@ -12,18 +15,18 @@ root (hd0,5)
 kernel   /boot/vmlinuz-2.6.37.4 root=UUID=69f14c28-4693-480f-8a4b-a9db2ab82cfe ro single
 initrd  /boot/initrd.img-2.6.37.4
 
-title Gentoo Linux 2.6.36-nofb
+title Gentoo Linux 2.6.38
 root (hd0,6)
-kernel /boot/kernel-genkernel-x86-2.6.36-gentoo-r8.default root=/dev/ram0 init=/linuxrc ramdisk=8192 real_root=/dev/sda7 vga=791 i915.modeset=1
-initrd /boot/initramfs-genkernel-x86-2.6.36-gentoo-r8.default
+kernel /boot/kernel-genkernel-x86-2.6.38-gentoo-r4 root=/dev/ram0 init=/linuxrc ramdisk=8192 real_root=/dev/sda7 i915.modeset=1
+initrd /boot/initramfs-genkernel-x86-2.6.38-gentoo-r4
 
-title Gentoo Linux 2.6.36-fb
+title Gentoo Linux 2.6.38-fbsplash
 root (hd0,6)
-kernel /boot/kernel-genkernel-x86-2.6.36-gentoo-r8 root=/dev/ram0 init=/linuxrc ramdisk=8192 real_root=/dev/sda7  vga=791 i915.modeset=1 splash=silent,theme:natural_gentoo console=tty1 quiet
-initrd /boot/initramfs-genkernel-x86-2.6.36-gentoo-r8
+kernel /boot/kernel-genkernel-x86-2.6.38-gentoo-r4 root=/dev/ram0 init=/linuxrc ramdisk=8192 real_root=/dev/sda7  i915.modeset=1 splash=silent,theme:natural_gentoo console=tty1 quiet
+initrd /boot/initramfs-genkernel-x86-2.6.38-gentoo-r4
 
 # Only in case you want to dual-boot
-title Windows 7
+title Windows 7 
 rootnoverify (hd0,0)
 makeactive
 chainloader +1

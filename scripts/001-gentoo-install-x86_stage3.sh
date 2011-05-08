@@ -12,7 +12,7 @@
 # See the GNU General Public License for more details.
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
+#
 
 #! /bin/bash
 #set -x
@@ -52,7 +52,7 @@ clear;
 
 setup_device()
 {
-	echo -e "${boldon}${redf}Starting Gentoo 32-bit for Stage 3....${reset}"
+	echo -e "${boldon}${redf}Starting Gentoo 32-bit Install for Stage 3....${reset}"
 	sleep 5;
 
         echo -e "${boldon}${redf}Enter the Partition name for Gentoo Install: ${reset}"
@@ -111,9 +111,9 @@ download_stage3_files()
 {
 	cd $INSTALL_PATH/;
 	echo -e "${yellowf}Downloading Stage3 Files....${reset}"
-	wget http://gentoo.osuosl.org/releases/x86/autobuilds/current-stage3/stage3-i686-20110405.tar.bz2;
-	wget http://gentoo.osuosl.org/releases/x86/autobuilds/current-stage3/stage3-i686-20110405.tar.bz2.CONTENTS;
-	wget http://gentoo.osuosl.org/releases/x86/autobuilds/current-stage3/stage3-i686-20110405.tar.bz2.DIGESTS;
+	wget http://gentoo.osuosl.org/releases/x86/autobuilds/current-stage3/stage3-i686-20110503.tar.bz2;
+	wget http://gentoo.osuosl.org/releases/x86/autobuilds/current-stage3/stage3-i686-20110503.tar.bz2.CONTENTS;
+	wget http://gentoo.osuosl.org/releases/x86/autobuilds/current-stage3/stage3-i686-20110503.tar.bz2.DIGESTS;
 	sleep 2;
 
 	echo -e "${yellowf}Downloading Portage Files....${reset}"
@@ -166,8 +166,9 @@ finish_stage3()
 	cp $GENTOO_CONF_FILES/package.license.gentoo $INSTALL_PATH/etc/portage/package.license
 	cp $GENTOO_CONF_FILES/grub.conf.gentoo.vm $INSTALL_PATH/root/
 	cp $GENTOO_CONF_FILES/grub.conf.gentoo.sda $INSTALL_PATH/root/
+	cp $GENTOO_CONF_FILES/fluxbox.startup.gentoo $INSTALL_PATH/root/
 	cp $GENTOO_CONF_FILES/conkyrc.gentoo $INSTALL_PATH/root/
-	#cp $GENTOO_CONF_FILES/kernel-config-x86-2.6.36-gentoo-r8.fbsplash-inteldrmfb-working $INSTALL_PATH/root/
+	cp $GENTOO_CONF_FILES/grub_buddha_tux.xpm.gz $INSTALL_PATH/root/
 
 	echo -e "${yellowf}Its Time to chroot....${reset}"
 	echo -e "${boldon}${redf}Now run ./chroot2Gentoo-0.1.sh to enter Your Gentoo Environment${reset}"

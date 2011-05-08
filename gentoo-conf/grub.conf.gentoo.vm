@@ -1,13 +1,16 @@
+#This is a sample GRUB Template
+#Feel free to edit to your liking
+
 default 0
 timeout 30
 splashimage=(hd0,0)/boot/grub/splash.xpm.gz
 
-title Gentoo Linux 2.6.34-r1
+title Gentoo Linux 2.6.38-r4
 root (hd0,0)
-kernel /boot/kernel-genkernel-x86-2.6.36-gentoo-r8 root=/dev/ram0 init=/linuxrc ramdisk=8192 real_root=/dev/sda1 vga=791
-initrd /boot/initramfs-genkernel-x86-2.6.36-gentoo-r8
+kernel /boot/kernel-genkernel-x86-2.6.38-gentoo-r4 root=/dev/ram0 init=/linuxrc ramdisk=8192 real_root=/dev/sda1 vga=791
+initrd /boot/initramfs-genkernel-x86-2.6.38-gentoo-r4
 
-title Gentoo Linux 2.6.34-r1-splash
+title Gentoo Linux 2.6.38-r4-splash
 root (hd0,0)
-kernel /boot/kernel-genkernel-x86-2.6.36-gentoo-r8 root=/dev/ram0 init=/linuxrc ramdisk=8192 real_root=/dev/sda1 vga=791 splash=silent,theme:natural_gentoo console=tty1 quiet
-initrd /boot/initramfs-genkernel-x86-2.6.36-gentoo-r8
+kernel /boot/kernel-genkernel-x86-2.6.38-gentoo-r4 root=/dev/ram0 init=/linuxrc ramdisk=8192 real_root=/dev/sda1 vga=791 splash=silent,theme:natural_gentoo console=tty1 quiet
+initrd /boot/initramfs-genkernel-x86-2.6.38-gentoo-r4

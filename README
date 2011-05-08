@@ -15,7 +15,6 @@
  ====================
   What does this do?
  ====================
-
   This program will automatically format a partition and perform a series of steps to install Latest Minimal Gentoo x86 (i686) Release.
   Make sure the partition you want to use is atleast 4-5 GB
 

@@ -4,6 +4,18 @@ media-libs/libmng static-libs
 media-libs/jpeg:0 static-libs
 virtual/jpeg static-libs
 media-gfx/splashutils fbcondecor
+sys-fs/udev extras
 x11-base/xorg-server udev
+media-libs/gd fontconfig jpeg (multilib) png truetype zlib static-libs xpm
+media-libs/imlib2 X bzip2 doc gif jpeg mp3 (multilib) nls png tiff zlib mmx
+x11-libs/cairo X glib (multilib) opengl svg drm gallium
+x11-libs/pango X introspection (multilib) doc
+app-admin/conky X audacious curl hddtemp imlib iostats lua lua-cairo math (multilib) ncurses portmon rss truetype vim-syntax weather-metar wifi
+media-video/libav 3dnow 3dnowext X alsa bzip2 cpudetection encode faac hardcoded-tables jpeg2k mmx mmxext mp3 (multilib) sdl ssse3 threads vaapi vorbis vpx x264 xvid zlib
+media-libs/libsdl audio joystick video X aalib alsa opengl pulseaudio static-libs svga  xv
+media-sound/audacious (multilib) nls session sse2
+media-plugins/audacious-plugins alsa cdda cue ffmpeg flac ipv6 lame (multilib) nls oss pulseaudio sse2 wavpack aac mp3 sdl
 x11-wm/fluxbox -gnome -kde truetype vim-syntax
 app-admin/conky truetype audacious -ipv6
+media-libs/libpng apng
+media-sound/alsa-utils

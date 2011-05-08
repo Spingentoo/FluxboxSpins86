@@ -12,7 +12,7 @@
 # See the GNU General Public License for more details.
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
+#
 
 #! /bin/bash
 #set -x
@@ -58,7 +58,7 @@ init()
 	cd /etc/init.d;
 	ln -s net.lo net.eth0
 	rc-update add net.eth0 default
-	cd /root
+	cd /root;
 }
 
 web_sync()
@@ -95,10 +95,8 @@ kernel_configure_and_install()
                 yes) time genkernel --clean --makeopts="-j5" --mrproper --splash --disklabel --install --menuconfig all; 
 			;;
 		no) echo -e "${yellowf}Auto configuring Gentoo Kernel....${reset}"
-                    time genkernel --clean --makeopts="-j5" --mrproper --splash --disklabel --install all; 
-			echo -e "${yellowf}Compiling Linux Kernel....${reset}"
 			time genkernel --clean --makeopts="-j5" --no-mrproper --splash --disklabel --install all;
-			exit 1;;
+			;;
 	esac
 
 	echo -e "${yellowf}Listing of Compiled Kernel & Ramdisk files....${reset}"
@@ -118,7 +116,7 @@ tools_install()
 	emerge slocate;
 	emerge lafilefixer gentoolkit;
 	emerge sys-apps/ifplugd;
-sleep 5;
+	sleep 5;
 }
 
 grub_install()
@@ -126,11 +124,11 @@ grub_install()
         echo -e "${yellowf}Installing Grub....${reset}"
         emerge grub
 
-        echo -e "${boldon}${yellowf}Have you made changes to file: 'grub.conf.gentoo' for changes in Partition/Linux Kernel/initrd/initramfs details !!!)${reset}"
+        echo -e "${boldon}${yellowf}Have you made changes to file: 'grub.conf.gentoo.sda or grub.conf.vm' for changes in Partition/Linux Kernel/initrd/initramfs details !!!)${reset}"
         read grub_conf
         case $grub_conf in
                 yes);;
-		no) echo "Please go back and make changes to grub.conf.gentoo" ; exit 1;;
+		no) echo "Please go back and make changes to grub.conf.gentoo.sda or grub.conf.vm" ; exit 1;;
 	esac
 
         echo -e "${boldon}${redf}Enter the GRUB bootloader install device (default: /dev/sda)${reset}"
@@ -140,37 +138,35 @@ grub_install()
         echo -e "${boldon}${redf}Do you want to continue ? [yes or no]: ${reset}"
         read grub_ans
         case $grub_ans in
-                yes) echo Proceed with  GRUB...... ;;
+                yes) echo Proceed with  GRUB...... ;
+			cp /root/grub.conf.gentoo.sda /boot/grub/grub.conf;
+			mkdir -p /boot/grub/splashimages;
+			cp /root/grub_buddha_tux.xpm.gz /boot/grub/splashimages/;
+			grep -v rootfs /proc/mounts > /etc/mtab;
+			grub-install --no-floppy $grub_device;
+			;;
 		no) echo Exitting from the script.....; exit 1;;
 	esac
-
-	cp /root/grub.conf.gentoo /boot/grub/grub.conf
-	grep -v rootfs /proc/mounts > /etc/mtab
-	grub-install --no-floppy $grub_device
 }
 
 splash_install()
 {
 	echo -e "${yellowf}Installing Splash Themes....${reset}"
 	sleep 5;
-	#emerge -C splash-themes-gentoo 
-	emerge -Duv world 
-	python-updater
-	revdep-rebuild 
-	emerge -1 jpeg 
-	emerge splashutils 
-	emerge splash-themes-livecd
-	emerge splash-themes-gentoo
-	#tar -zxvf /root/livecd-10.tar.gz -C /etc/splash/
-	splash_geninitramfs  --verbose --res 1024x768 --append /boot/initramfs-genkernel-x86-2.6.36-gentoo-r8  natural_gentoo
-	#splash_geninitramfs  --verbose --res 1920x1080 --append /boot/initramfs-genkernel-x86-2.6.36-gentoo-r8  livecd-10
+	emerge -Duv world; 
+	python-updater;
+	revdep-rebuild; 
+	emerge -1 jpeg; 
+	emerge splashutils; 
+	emerge splash-themes-livecd;
+	emerge splash-themes-gentoo;
+	splash_geninitramfs  --verbose --res 1024x768 --append /boot/initramfs-genkernel-x86-2.6.38-gentoo-r4  natural_gentoo
 
 ### Handy GRUB and SPLASH commands ###
 #grub-install --no-floppy /dev/sda
 #genkernel --no-clean --splash=livecd-2007.0  --splash-res=1920x1080 initramfs
 #splash_geninitramfs  --verbose --res 1920x1080 --append /boot/initramfs-genkernel-x86-2.6.36-gentoo-r8  livecd-10
 #splash_manager -c demo -t  CCux -m s --steps=100
-#splash_geninitramfs --verbose --res 1024x768  --append /boot/initramfs-genkernel-x86-2.6.36-gentoo-r8 Linux/
 #zcat /boot/initramfs-genkernel-x86-2.6.36-gentoo-r8 | cpio --list | grep Linux
 }
 
@@ -178,17 +174,17 @@ xorg_install()
 {
 	echo -e "${yellowf}Installing Minimal X....${reset}"
 	sleep 5;
-	emerge xorg-server xterm;
+	emerge xorg-server xterm ;
 }
 
 fluxbox_install()
 {
 	echo -e "${yellowf}Installing Window Manager - FLUXBOX....${reset}"
 	sleep 5;
-	USE="fontconfig truetype jpeg png " emerge gd
-	USE="X bzip2 nls zlib doc gif jpeg mmx mp3 png tiff" emerge -av  imlib2
-	emerge fluxbox eterm
-	echo "exec startfluxbox" > ~/.xinitrc
+	emerge gd imlib2; 
+	emerge fluxbox eterm mrxvt;
+	echo "exec startfluxbox" > ~/.xinitrc;
+	cp /root/fluxbox.startup.gentoo ~/.fluxbox/startup;
 }
 
 misc_libs_install()
@@ -197,27 +193,33 @@ misc_libs_install()
 	sleep 5;
 
 	revdep-rebuild 
-	emerge xf86-video-intel mesa libdrm cairo libva
+	emerge xf86-video-intel mesa libdrm libva
 	emerge mesa-progs
-	USE="X drm gallilium opengl" emerge  cairo
-	USE="X" emerge  pango
+	emerge cairo
+	emerge pango
 	emerge firefox
-	USE="X audacious curl hddtemp imlib iostats lua lua-cairo math rss truetype vim-syntax weather-metar weather-soap wifi" emerge
-	conky
-	emerge lm_sensors
-	emerge hddtemp
-	emerge feh
-	fluxbog-generate_menu -is -dg
+	emerge conky;
+	cp /root/conky.gentoo ~/.conkyrc;
+	emerge lm_sensors;
+	emerge hddtemp;
+	emerge feh;
+	fluxbox-generate_menu -is -dg;
 
+#To Set Wallpaper Run from X
 #wpsetters=feh fbsetbg /etc/splash/natural_gentoo/images/silent-1920x1200.jpg
+}
+
+media_libs_install()
+{
+	emerege libsdl libav libpng alsa-utils;
 }
 
 gentoo_sync()
 {
-emerge -Duv world
-python-updater
-revdep-rebuild
-etc-update
+	emerge -Duv world 
+	python-updater
+	revdep-rebuild 
+	etc-update
 }
 
 start_script()
@@ -253,7 +255,7 @@ do
 	echo -e "${boldon}${greenf}5. Configure and Install Kernel${reset}"
 	echo -e "${boldon}${greenf}6. Install basic tools${reset}"
 	echo -e "${boldon}${redf}7. Install Grub (NOTE: Installs GRUB in /dev/sda , edit file: grub.conf.gentoo to change device !!)${reset}"
-	echo -e "${boldon}${greenf}8. Install Splash Themes${reset}"
+	echo -e "${boldon}${greenf}8. Install Splash Themes (NOTE: Performs World Update too !!!) ${reset}"
 	echo -e "${boldon}${greenf}9. Install Minimal X${reset}"
 	echo -e "${boldon}${greenf}10. Install Fluxbox${reset}"
 	echo -e "${boldon}${greenf}11. Install Mesa,Cairo,Conky....${reset}"
@@ -272,7 +274,7 @@ case $opt in
         8) splash_install;;
         9) xorg_install;;
         10) fluxbox_install;;
-	11) misc_libs_install;;
+        11) misc_libs_install;;
 	12) gentoo_sync;;
         13) echo "Exit";
                 exit 1;;
@@ -303,4 +305,6 @@ echo -e "DONT FORGET TO CHANGE ROOT PASSWORD AFTER A NEW GENTOO INSTALL!!!${rese
 }
 
 start_script
+echo -e "${redf}DONT FORGET TO CHANGE ROOT PASSWORD AFTER A NEW GENTOO INSTALL!!!"
+echo -e "DONT FORGET TO CHANGE ROOT PASSWORD AFTER A NEW GENTOO INSTALL!!!${reset}"
 sleep 2;
